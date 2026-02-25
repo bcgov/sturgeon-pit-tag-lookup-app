@@ -10,9 +10,9 @@ Data displayed by this app should be used with caution as it may not be verified
 
 Users of this app will save harmless and forever releases and discharges the Province of British Columbia from and against any and all claims, demands, damages, causes of action, losses, costs and expenses of any kind and every nature which can or may arise from, or by reason of any act in relation to or arising from, the data provided in this app.
 
-For specific questions and feedback related to this app, or the provincial White Sturgeon mark-recapture database, please email [Fish.Issues\@gov.bc.ca](mailto:Fish.Issues@gov.bc.ca?subject=Sturgeon PIT tag lookup tool inquiry).
+For specific questions and feedback related to this app, or the provincial White Sturgeon mark-recapture database, please email [Fish.Issues\@gov.bc.ca](mailto:Fish.Issues@gov.bc.ca%3Fsubject=Sturgeon%20PIT%20tag%20lookup%20tool%20inquiry).
 
-![](www/BC.jpg){width="130"}
+![](www/BC.jpg | width=130)
 
 # License
 
