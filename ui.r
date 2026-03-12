@@ -55,7 +55,7 @@ fluidPage(title = "Fraser River drainage White Sturgeon PIT tag lookup tool",
 	  # Info box + map
 	fluidRow(
  		  # Left-side info sidebar
- 		  column(3, 
+ 		  column(5, 
  		         # Image w caption
  		         div(class = "figure",
  		             img(width = '100%', src = "P8240101.JPG", alt = "A juvenile sturgeon held up by somebody's arm. In the background is a lake with mountains and a clear sky."),

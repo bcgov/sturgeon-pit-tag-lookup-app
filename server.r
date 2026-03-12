@@ -44,8 +44,7 @@ data <- read.csv("dat.csv",
 # Shiny server function - this contains handling all the user inputs, and runs 
 # all the calculations and output entities (like tables, plots, and maps), as well as producing user-friendly warnings
 function(input, output, session) {
-  
-#------------------------------------------------------ Individual tag animation --------------------------------------------
+
 	# to create a list of serial tag numbers, from user input
 	RetrieveIndividualTags <- reactive({
 					tags <- gsub(" ", "", input$TagID)
