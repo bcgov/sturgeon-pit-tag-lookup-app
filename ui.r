@@ -48,6 +48,7 @@ options(spinner.type=1)
 # define the user interface function									   			
 fluidPage(title = "Fraser River drainage White Sturgeon PIT tag lookup tool",
           theme = "bcgov.css",
+          
 	titlePanel(
 	  # App title
 	  fluidRow(column(12, "Fraser River drainage White Sturgeon PIT tag lookup"))), 
@@ -69,8 +70,13 @@ fluidPage(title = "Fraser River drainage White Sturgeon PIT tag lookup tool",
 				        See below for further information and disclaimer. 
 				        <br>")),
 				
-				div(textInput(inputId = "TagID", label = "Enter an individual PIT tag number:", 
-						value = "7F7B0C4E1D"))),
+				div(
+				  textInput(inputId = "TagID", 
+				            label = "Enter an individual PIT tag number:", 
+				            value = "7F7B0C4E1D")
+				  ) # close div
+				
+				), # close column
 				
 				), # close fluidRow
 				

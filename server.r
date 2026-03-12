@@ -38,7 +38,9 @@ library(leaflet.extras)
 
 # read in the fish data				
 data <- read.csv("dat.csv",
-                 check.names = FALSE) %>%
+                 check.names = FALSE,
+                 na.strings = c("NA", ""),
+                 strip.white = TRUE) %>%
 		rename(`River kilometer area` = RKM_Round)
 
 # Shiny server function - this contains handling all the user inputs, and runs 
@@ -56,22 +58,25 @@ function(input, output, session) {
 						filter(FishID %in% unique(data[id,]$FishID)) %>%
 						select(-FishID)
 										})
-												
-	# download handler for the tabular summaries
-	# output$RetrieveIndividualTagsDownload <- downloadHandler(
-		# filename = "List of tag encounters.xlsx",
-							
-		# content = function(filename){
-			# out <- list("tag info" = RetrieveIndividualTags(),
-						# "User inputs" = data.frame(`Tag number` = input$TagID))
-									
-			# write_xlsx(out, filename) # write to excel - this will show in the user's downloads
-					# } # content
-					# )  # RetrieveIndividualTagsDownload
 			
 	output$TagTable <- DT::renderDataTable({
 		RetrieveIndividualTags()
-								   }, options = list(autoWidth = FALSE, paging = FALSE, searching = FALSE))
+								   }, 
+		options = list(autoWidth = FALSE, 
+		               paging = FALSE, 
+		               searching = FALSE))
+	
+	# download handler for the tabular summaries
+	# output$RetrieveIndividualTagsDownload <- downloadHandler(
+	# filename = "List of tag encounters.xlsx",
+	
+	# content = function(filename){
+	# out <- list("tag info" = RetrieveIndividualTags(),
+	# "User inputs" = data.frame(`Tag number` = input$TagID))
+	
+	# write_xlsx(out, filename) # write to excel - this will show in the user's downloads
+	# } # content
+	# )  # RetrieveIndividualTagsDownload
 								   
 }
 
