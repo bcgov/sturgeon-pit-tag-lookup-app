@@ -70,7 +70,8 @@ fluidPage(title = "Fraser River drainage White Sturgeon PIT tag lookup tool",
 				div(
 				  textInput(inputId = "TagID", 
 				            label = "Enter an individual PIT tag number:", 
-				            value = "7F7B0C4E1D")
+				            #value = "7F7B0C4E1D"
+				            value = "")
 				  ) # close div
 				
 				), # close column
@@ -92,6 +93,7 @@ fluidPage(title = "Fraser River drainage White Sturgeon PIT tag lookup tool",
 	  column(1,
 	         downloadButton("DownloadTagTable", "Download PIT tag data") 
 	  )
+	  
 	),
 	
 	# About + Disclaimer

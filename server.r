@@ -29,8 +29,6 @@ library(plyr)
 library(dplyr)
 library(tidyr)
 
-library(writexl)
-
 library(shiny)
 library(shinydashboard)
 
@@ -39,7 +37,8 @@ data <- read.csv("dat.csv",
                  check.names = FALSE,
                  na.strings = c("NA", ""),
                  strip.white = TRUE) %>%
-		rename(`River kilometer area` = RKM_Round)
+		rename(`River kilometer area` = RKM_Round) %>%
+  dplyr::arrange(`Capture date`)
 
 # Shiny server function - this contains handling all the user inputs, and runs 
 # all the calculations and output entities (like tables, plots, and maps), as well as producing user-friendly warnings
@@ -51,24 +50,35 @@ function(input, output, session) {
 					tags <- trimws(unlist(strsplit(tags, ",")))
 					id <- which(data$`Tag number` %in% toupper(tags))
 					
-					data %>%
-						filter(FishID %in% unique(data[id,]$FishID)) %>%
-						select(-FishID)
-										})
+					# If no ID supplied, return full data table
+					if (is.integer(id) && length(id) == 0) {
+					  out <- data %>%
+					    select(-FishID)
+					} else { # Else return subset
+					  out <- data %>%
+					    filter(FishID %in% unique(data[id,]$FishID)) %>%
+					    select(-FishID)
+					}
+					return(out)
+					})
 			
 	output$TagTable <- DT::renderDataTable({
 		RetrieveIndividualTags()
 								   }, 
 		options = list(autoWidth = FALSE, 
-		               paging = FALSE, 
+		               pageLength = 5,
+		               #paging = FALSE, 
 		               searching = FALSE))
 	
 	# download handler for the tabular summaries
 	output$DownloadTagTable <- downloadHandler(
 	  filename = "white-sturgeon-pit-records.csv",
 	  content = function(filename){
+	    # Option A: download filtered data
 	    out <- list("tag info" = RetrieveIndividualTags(),
 	                "User inputs" = data.frame(`Tag number` = input$TagID))
+	    # Option B: download all data
+	    # out <- data
 	    write.csv(out, filename) # write to csv - this will show in the user's downloads
 	    } # content
 	)  # DownloadTagTable
