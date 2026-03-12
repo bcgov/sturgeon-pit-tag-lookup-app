@@ -37,7 +37,8 @@ library(leaflet)
 library(leaflet.extras)
 
 # read in the fish data				
-data <- readRDS("compiled data.rds") %>%
+data <- read.csv("dat.csv",
+                 check.names = FALSE) %>%
 		rename(`River kilometer area` = RKM_Round)
 
 # Shiny server function - this contains handling all the user inputs, and runs 
@@ -69,8 +70,7 @@ function(input, output, session) {
 					# )  # RetrieveIndividualTagsDownload
 			
 	output$TagTable <- DT::renderDataTable({
-		RetrieveIndividualTags() %>%
-			select(-Lat, -Lon, -`River km`)
+		RetrieveIndividualTags()
 								   }, options = list(autoWidth = FALSE, paging = FALSE, searching = FALSE))
 								   
 }
