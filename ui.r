@@ -72,12 +72,6 @@ fluidPage(title = "Fraser River drainage White Sturgeon PIT tag lookup tool",
 				div(textInput(inputId = "TagID", label = "Enter an individual PIT tag number:", 
 						value = "7F7B0C4E1D"))),
 				
-				column(9, 
-				       leafletOutput("Map", height = 500),
-				       div(class = "caption",
-				           HTML("The map only populates when GPS coordinates were provided with capture record.")
-				           )
-				       )
 				), # close fluidRow
 				
 	# Data table

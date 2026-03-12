@@ -72,51 +72,6 @@ function(input, output, session) {
 		RetrieveIndividualTags() %>%
 			select(-Lat, -Lon, -`River km`)
 								   }, options = list(autoWidth = FALSE, paging = FALSE, searching = FALSE))
-
-	output$Map <- renderLeaflet({
-		leaflet(data %>% filter(!is.na(Lon), !is.na(Lat)), 
-			options = leafletOptions(
-			attributionControl=FALSE, minZoom = 4, maxZoom = 11)) %>%
-			setView(lng = -123.6, lat = 51.2, zoom = 6) %>%
-			addProviderTiles("Esri.WorldImagery", layerId = "basetile",
-				options = providerTileOptions(opacity = 0.75)) %>% 
-			#setMaxBounds(lng1 = -122, lat1 = 47, lng2 = -118, lat2 = 56) %>%
-	    addFullscreenControl() # leaflet.extras
-										}) # Map
-								   
-	observe({
-		if(input$TagID != "All" & nrow(RetrieveIndividualTags() %>% filter(!is.na(Lon), !is.na(Lat))) == 0){
-			leafletProxy("Map") %>% 
-					clearShapes()	
-												}	
-					 
-		if(input$TagID != "All" & nrow(RetrieveIndividualTags() %>% filter(!is.na(Lon), !is.na(Lat))) > 0){
-			dat <- RetrieveIndividualTags() %>%
-					filter(!is.na(Lon), !is.na(Lat)) %>%
-					mutate(Lab = paste0("Tag number ", `Tag number`, "<br/>",
-										"Capture date = ", `Capture date`, "<br/>",
-										"River kilometer area = ", `River kilometer area`, "<br/>",
-										"Fork length = ", `Fork length`, " cm"))
-			leafletProxy("Map") %>% 
-					addCircles(data = dat, lng = dat$Lon, lat = dat$Lat, 
-						radius = 5000, opacity = 0.7, fill = TRUE, fillOpacity = 0.7,
-						color = "red", fillColor = "white", weight = 1, popup = ~as.character(Lab)) 
-												}
-												
-		if(input$TagID == "All"){
-			dat <- data %>%
-					filter(!is.na(Lon), !is.na(Lat)) %>%
-					mutate(Lab = paste0("Tag number ", `Tag number`, "<br/>",
-										"Capture date = ", `Capture date`, "<br/>",
-										"River kilometer area = ", `River kilometer area`, "<br/>",
-										"Fork length = ", `Fork length`, " cm"))
-			leafletProxy("Map") %>% 
-					addCircles(data = dat, lng = dat$Lon, lat = dat$Lat, 
-						radius = 5000, opacity = 0.7, fill = TRUE, fillOpacity = 0.7,
-						color = "red", fillColor = "white", weight = 1, popup = ~as.character(Lab)) 
-												}	
-												
-										}) # Map	
 								   
 }
 
