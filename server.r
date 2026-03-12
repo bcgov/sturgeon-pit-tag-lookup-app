@@ -52,13 +52,14 @@ function(input, output, session) {
 					
 					# If no ID supplied, return full data table
 					if (is.integer(id) && length(id) == 0) {
-					  out <- data %>%
-					    select(-FishID)
+					  out <- data #%>%
+					    #select(-FishID)
 					} else { # Else return subset
 					  out <- data %>%
-					    filter(FishID %in% unique(data[id,]$FishID)) %>%
-					    select(-FishID)
+					    filter(FishID %in% unique(data[id,]$FishID)) #%>%
+					    #select(-FishID)
 					}
+					
 					return(out)
 					})
 			
