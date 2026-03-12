@@ -33,7 +33,6 @@ library(writexl)
 
 library(shiny)
 library(shinydashboard)
-library(leaflet)
 
 library(DT)
 # library(shinycssloaders)

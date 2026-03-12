@@ -33,8 +33,6 @@ library(writexl)
 
 library(shiny)
 library(shinydashboard)
-library(leaflet)
-library(leaflet.extras)
 
 # read in the fish data				
 data <- read.csv("dat.csv",
