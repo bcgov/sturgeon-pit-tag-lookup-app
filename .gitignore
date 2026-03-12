@@ -1,5 +1,7 @@
 .Rprofile
+.Rhistory
 *.rds
+*.csv
 rsconnect*
 .Rproj.user/*
 .Rproj.user
