@@ -64,16 +64,14 @@ function(input, output, session) {
 		               searching = FALSE))
 	
 	# download handler for the tabular summaries
-	# output$RetrieveIndividualTagsDownload <- downloadHandler(
-	# filename = "List of tag encounters.xlsx",
-	
-	# content = function(filename){
-	# out <- list("tag info" = RetrieveIndividualTags(),
-	# "User inputs" = data.frame(`Tag number` = input$TagID))
-	
-	# write_xlsx(out, filename) # write to excel - this will show in the user's downloads
-	# } # content
-	# )  # RetrieveIndividualTagsDownload
+	output$DownloadTagTable <- downloadHandler(
+	  filename = "white-sturgeon-pit-records.csv",
+	  content = function(filename){
+	    out <- list("tag info" = RetrieveIndividualTags(),
+	                "User inputs" = data.frame(`Tag number` = input$TagID))
+	    write.csv(out, filename) # write to csv - this will show in the user's downloads
+	    } # content
+	)  # DownloadTagTable
 								   
 }
 

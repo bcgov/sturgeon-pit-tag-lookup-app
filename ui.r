@@ -29,8 +29,6 @@ library(plyr)
 library(dplyr)
 library(tidyr)
 
-library(writexl)
-
 library(shiny)
 library(shinydashboard)
 
@@ -88,6 +86,13 @@ fluidPage(title = "Fraser River drainage White Sturgeon PIT tag lookup tool",
 				
 				div(DT::dataTableOutput("TagTable"), style = "font-size:80%;padding-top:5px; padding-bottom:2px;margin-left:20px;margin-right:20px;margin-top:5px")
 				),
+	
+	# Download button
+	fluidRow(
+	  column(1,
+	         downloadButton("DownloadTagTable", "Download PIT tag data") 
+	  )
+	),
 	
 	# About + Disclaimer
 	fluidRow(
