@@ -1,8 +1,14 @@
 # White Sturgeon PIT tag lookup tool <img src="www/BC.jpg" align="right" height="128"/>
 
+https://bcgov-env.shinyapps.io/sturgeon-pit-tag-lookup/
+
 This RShiny app houses White Sturgeon (*Acipenser transmontanus*) mark-recapture data collected in the Fraser River drainage from May 1991 to December 2020. With this tool, any user can enter in a PIT tag serial number to look up if the fish has been recaptured before and any associated data (fish length, location, etc. at last capture).
 
-These data are maintained by the Reconciliation, Lands, Policy and Data Division within the [Ministry of Water, Land and Resource Stewardship (WLRS)](https://www2.gov.bc.ca/gov/content/environment/plants-animals-ecosystems/fish/fish-and-fish-habitat-data-information). This database is currently under maintenance while we update records to 2026. Data and information housed within the database is collected by both government biologists and partners such as First Nations, scientific fish collection permit holders, and participating fishery organizations.
+These data are maintained by the Reconciliation, Lands, Policy and Data Division within the [Ministry of Water, Land and Resource Stewardship (WLRS)](https://www2.gov.bc.ca/gov/content/environment/plants-animals-ecosystems/fish/fish-and-fish-habitat-data-information). We are currently in the process of updating records to 2026. Data and information housed within the database is collected by both government biologists and partners such as First Nations, scientific fish collection permit holders, and participating fishery organizations.
+
+## Data Access
+
+All data used in the sturgeon PIT tag lookup tool is publicly available via the [BC Data Catalogue](https://catalogue.data.gov.bc.ca/dataset/white-sturgeon-fraser-river-drainage-mark-recapture-pit-tag-data).
 
 ## Disclaimer
 
