@@ -29,17 +29,17 @@ library(plyr)
 library(dplyr)
 library(tidyr)
 
-library(writexl)
-
 library(shiny)
 library(shinydashboard)
 
-# read in the fish data				
-data <- read.csv("dat.csv",
+# read in the fish data	
+# https://catalogue.data.gov.bc.ca/dataset/white-sturgeon-fraser-river-drainage-mark-recapture-pit-tag-data
+data <- read.csv("https://catalogue.data.gov.bc.ca/dataset/2a5d2e5e-36eb-412b-89ff-508dae26a7ff/resource/c112b7db-2e4d-4d0a-ae9d-c69ce8184796/download/sturgeon-pit-tag-dat.csv",
                  check.names = FALSE,
                  na.strings = c("NA", ""),
                  strip.white = TRUE) %>%
-		rename(`River kilometer area` = RKM_Round)
+		rename(`River kilometer area` = RKM_Round) %>%
+  dplyr::arrange(`Capture date`)
 
 # Shiny server function - this contains handling all the user inputs, and runs 
 # all the calculations and output entities (like tables, plots, and maps), as well as producing user-friendly warnings
@@ -51,29 +51,39 @@ function(input, output, session) {
 					tags <- trimws(unlist(strsplit(tags, ",")))
 					id <- which(data$`Tag number` %in% toupper(tags))
 					
-					data %>%
-						filter(FishID %in% unique(data[id,]$FishID)) %>%
-						select(-FishID)
-										})
+					# If no ID supplied, return full data table
+					if (is.integer(id) && length(id) == 0) {
+					  out <- data #%>%
+					    #select(-FishID)
+					} else { # Else return subset
+					  out <- data %>%
+					    filter(FishID %in% unique(data[id,]$FishID)) #%>%
+					    #select(-FishID)
+					}
+					
+					return(out)
+					})
 			
 	output$TagTable <- DT::renderDataTable({
 		RetrieveIndividualTags()
 								   }, 
 		options = list(autoWidth = FALSE, 
-		               paging = FALSE, 
+		               pageLength = 5,
+		               #paging = FALSE, 
 		               searching = FALSE))
 	
 	# download handler for the tabular summaries
-	# output$RetrieveIndividualTagsDownload <- downloadHandler(
-	# filename = "List of tag encounters.xlsx",
-	
-	# content = function(filename){
-	# out <- list("tag info" = RetrieveIndividualTags(),
-	# "User inputs" = data.frame(`Tag number` = input$TagID))
-	
-	# write_xlsx(out, filename) # write to excel - this will show in the user's downloads
-	# } # content
-	# )  # RetrieveIndividualTagsDownload
+	output$DownloadTagTable <- downloadHandler(
+	  filename = "sturgeon-pit-tag-dat.csv",
+	  content = function(filename){
+	    # Option A: download filtered data
+	    out <- list("tag info" = RetrieveIndividualTags(),
+	                "User inputs" = data.frame(`Tag number` = input$TagID))
+	    # Option B: download all data
+	    # out <- data
+	    write.csv(out, filename) # write to csv - this will show in the user's downloads
+	    } # content
+	)  # DownloadTagTable
 								   
 }
 
