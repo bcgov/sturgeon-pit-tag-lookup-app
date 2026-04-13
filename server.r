@@ -32,8 +32,9 @@ library(tidyr)
 library(shiny)
 library(shinydashboard)
 
-# read in the fish data				
-data <- read.csv("dat.csv",
+# read in the fish data	
+# https://catalogue.data.gov.bc.ca/dataset/white-sturgeon-fraser-river-drainage-mark-recapture-pit-tag-data
+data <- read.csv("https://catalogue.data.gov.bc.ca/dataset/2a5d2e5e-36eb-412b-89ff-508dae26a7ff/resource/c112b7db-2e4d-4d0a-ae9d-c69ce8184796/download/sturgeon-pit-tag-dat.csv",
                  check.names = FALSE,
                  na.strings = c("NA", ""),
                  strip.white = TRUE) %>%
@@ -73,7 +74,7 @@ function(input, output, session) {
 	
 	# download handler for the tabular summaries
 	output$DownloadTagTable <- downloadHandler(
-	  filename = "white-sturgeon-pit-records.csv",
+	  filename = "sturgeon-pit-tag-dat.csv",
 	  content = function(filename){
 	    # Option A: download filtered data
 	    out <- list("tag info" = RetrieveIndividualTags(),

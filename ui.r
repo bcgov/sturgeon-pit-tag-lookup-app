@@ -103,6 +103,9 @@ fluidPage(title = "Fraser River drainage White Sturgeon PIT tag lookup tool",
 	         style = "padding: 1em;",
 	  HTML("<h2>About</h2>
 	  These data are maintained by the Reconciliation, Lands, Policy and Data Division within the <a href = 'https://www2.gov.bc.ca/gov/content/environment/plants-animals-ecosystems/fish/fish-and-fish-habitat-data-information'>Ministry of Water, Land and Resource Stewardship (WLRS)</a>. This database is currently under maintenance while we update records to 2026. Data and information housed within the database is collected by both government biologists and partners such as First Nations, scientific fish collection permit holders, and participating fishery organizations.
+	  <br/>
+	  <br/>
+	  These data can also be accessed via the <a href = 'https://catalogue.data.gov.bc.ca/dataset/white-sturgeon-fraser-river-drainage-mark-recapture-pit-tag-data'>BC Data Catalogue</a>.
 	    <br/>
 	    <br/>
 	  <h2>Disclaimer</h2>
