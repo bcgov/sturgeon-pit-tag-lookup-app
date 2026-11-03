@@ -52,7 +52,7 @@ function(input, output, session) {
 					id <- which(data$`Tag number` %in% toupper(tags))
 					
 					# If no ID supplied, return full data table
-					if (is.integer(id) && length(id) == 0) {
+					if (length(tags) == 0) {
 					  out <- data #%>%
 					    #select(-FishID)
 					} else { # Else return subset
